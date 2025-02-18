@@ -1,0 +1,24 @@
+
+
+services:
+  producer:
+    build: ./producer
+    ports:
+      - "5000:5000"
+    networks:
+      - my_network
+
+  consumer:
+    build: ./consumer
+    depends_on:
+      - producer
+    volumes:
+      - my_data:/data
+    networks:
+      - my_network
+
+networks:
+  my_network:
+
+volumes:
+  my_data:
